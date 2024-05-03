@@ -1,0 +1,118 @@
+# Function to display the calculator menu
+show_menu() {
+    echo "Calculator Menu:"
+    echo "1) Add"
+    echo "2) Subtract"
+    echo "3) Multiply"
+    echo "4) Divide"
+    echo "5) Modulus"
+    echo "6) Exponentiation"
+    echo "7) Exit"
+}
+
+# Function to perform addition
+add() {
+    echo "Enter first number: "
+    read num1
+    echo "Enter second number: "
+    read num2
+    echo "Result: $(($num1 + $num2))"
+}
+
+# Function to perform subtraction
+subtract() {
+    echo "Enter first number: "
+    read num1
+    echo "Enter second number: "
+    read num2
+    echo "Result: $(($num1 - $num2))"
+}
+
+# Function to perform multiplication
+multiply() {
+    echo "Enter first number: "
+    read num1
+    echo "Enter second number: "
+    read num2
+    echo "Result: $(($num1 * $num2))"
+}
+
+# Function to perform division
+divide() {
+    echo "Enter first number: "
+    read num1
+    echo "Enter second number: "
+    read num2
+    if [ $num2 -eq 0 ]; then
+        echo "Cannot divide by zero."
+    else
+        echo "Result: $(($num1 / $num2))"
+    fi
+}
+
+# Function to perform modulus (remainder)
+modulus() {
+    echo "Enter first number: "
+    read num1
+    echo "Enter second number: "
+    read num2
+    echo "Result: $(($num1 % $num2))"
+}
+
+# Function to perform exponentiation
+exponent() {
+    echo "$1 ^ $2" | bc
+}
+
+# Main program starts here
+
+echo "Welcome to the Calculator Project!"
+echo "Please sign in to continue."
+echo -n "Username: "
+read username
+
+if [ -z "$username" ]; then
+    echo "Username cannot be empty. Exiting."
+    exit 1
+fi
+
+# Prompt for password (you can replace this with a more secure method)
+echo -n "Password: "
+read -s password
+echo
+
+# Simple password check (replace with a secure authentication system)
+if [ "$password" != "secret" ]; then
+    echo "Incorrect password. Access denied."
+    exit 1
+fi
+
+echo "Hello, $username! Let's do some calculations."
+
+while true; do
+    show_menu
+    read -p "Select an option (1-7): " option
+   
+    case $option in
+        1) add ;;
+        2) subtract ;;
+        3) multiply ;;
+        4) divide ;;
+        5) modulus ;;
+        6) 
+            echo "Enter base number: "
+            read base
+            echo "Enter exponent: "
+            read exp
+            result=$(exponent $base $exp)
+            echo "Result: $result"
+            ;;
+        7)
+            echo "Thank you for using the calculator. Goodbye!"
+            exit 0
+            ;;
+        *)
+            echo "Invalid option. Please try again."
+            ;;
+    esac
+done
